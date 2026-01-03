@@ -8,7 +8,7 @@
 - bstract Factory Pattern (VehiculeFactory, EssenceFactory, ElectriqueFactory)
 - Prochain : Builder Pattern
 
-Plan de note implementation:
+Plan de notre implementation:
 1.  Structure de base
 2.  Modèles de domaine (Vehicule, Client, Commande)
 3.  Abstract Factory Pattern
