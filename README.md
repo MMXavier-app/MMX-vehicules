@@ -26,19 +26,12 @@ Plan de note implementation:
 15. Interface web
 16. API REST + Base de données
 
-### Détails de l'implémentation
+### Voici l'implémentation proprement dite:
 **Abstract Factory Pattern**: Permet de créer des familles d'objets liés sans spécifier leurs classes concrètes.
 - `VehiculeFactory`: Interface commune pour la création de véhicules
 - `EssenceFactory`: Implémentation pour les véhicules essence
 - `ElectriqueFactory`: Implémentation pour les véhicules électriques
 
-**Avantages**:
-- Séparation entre création et utilisation
-- Extensibilité facile (ajouter une nouvelle factory)
-- Cohérence des familles d'objets créés
 
-### Test du pattern
-Exécuter: `cd backend && javac -cp . src/main/java/com/vehicules/patterns/factory/*.java src/main/java/com/vehicules/model/*.java src/test/java/com/vehicules/AbstractFactoryDemo.java && java -cp .:src/main/java com.vehicules.AbstractFactoryDemo`
-
-### Dépôt GitHub
+### Le lien de notre Dépôt GitHub:
 https://github.com/MMXavier-app/INF4067_Vehicules_2026
