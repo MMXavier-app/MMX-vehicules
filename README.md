@@ -2,10 +2,11 @@
 
 ## Progression étape par étape des Design Patterns
 
-### Étape actuelle : Modèles de domaine
+### Étape actuelle : Abstract Factory Pattern
 - ✅ Structure du projet
 - ✅ Modèles de domaine (Vehicule, Client, Commande)
-- ⏳ Prochain : Abstract Factory Pattern
+- ✅ Abstract Factory Pattern (VehiculeFactory, EssenceFactory, ElectriqueFactory)
+- ⏳ Prochain : Builder Pattern
 
 ### Plan de progression
 1. 🏗️ Structure de base
@@ -26,10 +27,18 @@
 16. 🗄️ API REST + Base de données
 
 ### Détails de l'implémentation
-**Modèles de domaine**: Classes fondamentales du système
-- `Vehicule`: Représente un véhicule à vendre
-- `Client`: Représente un client (particulier ou société)
-- `Commande`: Représente une commande avec son statut
+**Abstract Factory Pattern**: Permet de créer des familles d'objets liés sans spécifier leurs classes concrètes.
+- `VehiculeFactory`: Interface commune pour la création de véhicules
+- `EssenceFactory`: Implémentation pour les véhicules essence
+- `ElectriqueFactory`: Implémentation pour les véhicules électriques
+
+**Avantages**:
+- Séparation entre création et utilisation
+- Extensibilité facile (ajouter une nouvelle factory)
+- Cohérence des familles d'objets créés
+
+### Test du pattern
+Exécuter: `cd backend && javac -cp . src/main/java/com/vehicules/patterns/factory/*.java src/main/java/com/vehicules/model/*.java src/test/java/com/vehicules/AbstractFactoryDemo.java && java -cp .:src/main/java com.vehicules.AbstractFactoryDemo`
 
 ### Dépôt GitHub
 https://github.com/MMXavier-app/INF4067_Vehicules_2026
