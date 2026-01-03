@@ -2,9 +2,10 @@
 
 ## Progression étape par étape des Design Patterns
 
-### Étape actuelle : Initialisation
+### Étape actuelle : Modèles de domaine
 - ✅ Structure du projet
-- ⏳ Prochain : Modèles de domaine
+- ✅ Modèles de domaine (Vehicule, Client, Commande)
+- ⏳ Prochain : Abstract Factory Pattern
 
 ### Plan de progression
 1. 🏗️ Structure de base
@@ -23,6 +24,12 @@
 14. 🎮 Command Pattern
 15. 🌐 Interface web
 16. 🗄️ API REST + Base de données
+
+### Détails de l'implémentation
+**Modèles de domaine**: Classes fondamentales du système
+- `Vehicule`: Représente un véhicule à vendre
+- `Client`: Représente un client (particulier ou société)
+- `Commande`: Représente une commande avec son statut
 
 ### Dépôt GitHub
 https://github.com/MMXavier-app/INF4067_Vehicules_2026
