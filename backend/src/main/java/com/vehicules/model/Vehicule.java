@@ -1,40 +1,63 @@
 package com.vehicules.model;
 
-public class Vehicule {
-    private String type; // AUTOMOBILE ou SCOOTER
-    private String energie; // ESSENCE ou ELECTRIQUE
+public abstract class Vehicule {
     private String marque;
     private String modele;
-    private double prix;
+    private Double prix;
+    private String typeEnergie;
     
+    // Constructeurs
     public Vehicule() {}
     
-    public Vehicule(String type, String energie, String marque, String modele, double prix) {
-        this.type = type;
-        this.energie = energie;
+    public Vehicule(String marque, String modele, Double prix) {
         this.marque = marque;
         this.modele = modele;
         this.prix = prix;
     }
     
-    // Getters et setters
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
+    public Vehicule(String marque, String modele, Double prix, String typeEnergie) {
+        this(marque, modele, prix);
+        this.typeEnergie = typeEnergie;
+    }
     
-    public String getEnergie() { return energie; }
-    public void setEnergie(String energie) { this.energie = energie; }
+    // Getters et Setters
+    public String getMarque() {
+        return marque;
+    }
     
-    public String getMarque() { return marque; }
-    public void setMarque(String marque) { this.marque = marque; }
+    public void setMarque(String marque) {
+        this.marque = marque;
+    }
     
-    public String getModele() { return modele; }
-    public void setModele(String modele) { this.modele = modele; }
+    public String getModele() {
+        return modele;
+    }
     
-    public double getPrix() { return prix; }
-    public void setPrix(double prix) { this.prix = prix; }
+    public void setModele(String modele) {
+        this.modele = modele;
+    }
+    
+    public Double getPrix() {
+        return prix;
+    }
+    
+    public void setPrix(Double prix) {
+        this.prix = prix;
+    }
+    
+    public String getTypeEnergie() {
+        return typeEnergie;
+    }
+    
+    public void setTypeEnergie(String typeEnergie) {
+        this.typeEnergie = typeEnergie;
+    }
+    
+    // Méthode abstraite
+    public abstract Double calculerTaxe();
     
     @Override
     public String toString() {
-        return marque + " " + modele + " (" + type + " - " + energie + ") - " + prix + "€";
+        return marque + " " + modele + " (" + typeEnergie + ") - " + prix + "€";
     }
 }
