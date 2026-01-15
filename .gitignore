@@ -1,0 +1,87 @@
+# Java/Spring Boot
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.iml
+*.ipr
+*.iws
+.settings/
+.classpath
+.project
+.factorypath
+bin/
+out/
+logs/
+
+# Node.js/React
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+dist/
+dist-ssr/
+*.local
+coverage/
+
+# Environnement
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.development
+.env.production
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Système d'exploitation
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Maven
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Spring Boot
+application.properties.local
+application-dev.properties
+
+# Frontend build
+frontend/build/
+frontend/.cache/
+frontend/.vite/
+
+# Backend spécifique
+backend/.gradle/
+backend/gradle/
+backend/HELP.md
+
+# Fichiers temporaires
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Logs applicatifs
+*.log
+logs/
