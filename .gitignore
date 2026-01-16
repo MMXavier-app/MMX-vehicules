@@ -1,4 +1,4 @@
-# Java/Spring Boot
+# Java
 target/
 *.class
 *.jar
@@ -15,7 +15,7 @@ bin/
 out/
 logs/
 
-# Node.js/React
+# Node.js
 node_modules/
 npm-debug.log*
 yarn-debug.log*
@@ -26,14 +26,12 @@ dist-ssr/
 *.local
 coverage/
 
-# Environnement
+# Environment
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
-.env.development
-.env.production
 
 # IDE
 .vscode/
@@ -42,13 +40,8 @@ coverage/
 *.swo
 *~
 
-# Système d'exploitation
+# System
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
 
 # Maven
@@ -62,26 +55,29 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
-# Spring Boot
-application.properties.local
-application-dev.properties
+# Specific directories in our project
+backend/target/
+frontend/node_modules/
+frontend/dist/
+INF4067_Vehicules_2026/target/
 
-# Frontend build
-frontend/build/
-frontend/.cache/
-frontend/.vite/
-
-# Backend spécifique
-backend/.gradle/
-backend/gradle/
-backend/HELP.md
-
-# Fichiers temporaires
+# Temporary files
 *.tmp
 *.temp
-temp/
 tmp/
+temp/
 
-# Logs applicatifs
+# Logs
 *.log
 logs/
+
+# Build outputs
+build/
+out/
+production/
+
+# System files
+*.orig
+*.rej
+*.bak
+*.backup
