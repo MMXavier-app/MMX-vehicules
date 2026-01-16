@@ -1,0 +1,24 @@
+# Compilation
+*.class
+target/
+bin/
+build/
+out/
+
+# Logs
+*.log
+logs/
+
+# IDE
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+
+# Système
+.DS_Store
+Thumbs.db
+
+# Frontend
+frontend/node_modules/

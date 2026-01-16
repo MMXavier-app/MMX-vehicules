@@ -1,0 +1,149 @@
+package com.vehicules.controller;
+
+import com.vehicules.template.*;
+import org.springframework.web.bind.annotation.*;
+import java.util.*;
+import java.time.LocalDateTime;
+
+@RestController
+@RequestMapping("/api/commandes")
+@CrossOrigin(origins = "*")
+public class CommandeController {
+    
+    private List<Map<String, Object>> commandes = new ArrayList<>();
+    private int commandeCounter = 1;
+    
+    @GetMapping
+    public List<Map<String, Object>> getAllCommandes() {
+        if (commandes.isEmpty()) {
+            // Initialiser avec quelques commandes de démo
+            Map<String, Object> cmd1 = new HashMap<>();
+            cmd1.put("id", 1);
+            cmd1.put("numero", "CMD-0001");
+            cmd1.put("client", "Jean Dupont");
+            cmd1.put("montant", 28000.0);
+            cmd1.put("status", "VALIDEE");
+            cmd1.put("dateCreation", "2024-01-03T10:30:00");
+            cmd1.put("typePaiement", "comptant");
+            commandes.add(cmd1);
+            
+            Map<String, Object> cmd2 = new HashMap<>();
+            cmd2.put("id", 2);
+            cmd2.put("numero", "CMD-0002");
+            cmd2.put("client", "Marie Curie");
+            cmd2.put("montant", 45000.0);
+            cmd2.put("status", "EN_COURS");
+            cmd2.put("dateCreation", "2024-01-04T14:45:00");
+            cmd2.put("typePaiement", "credit");
+            commandes.add(cmd2);
+        }
+        return commandes;
+    }
+    
+    @PostMapping
+    public Map<String, Object> createCommande(@RequestBody Map<String, Object> commandeData) {
+        Map<String, Object> nouvelleCommande = new HashMap<>(commandeData);
+        nouvelleCommande.put("id", commandeCounter++);
+        nouvelleCommande.put("numero", "CMD-" + String.format("%04d", commandeCounter));
+        nouvelleCommande.put("dateCreation", LocalDateTime.now().toString());
+        nouvelleCommande.put("status", "EN_COURS");
+        
+        // Factory Method simulation
+        String typePaiement = (String) commandeData.getOrDefault("typePaiement", "comptant");
+        if ("credit".equals(typePaiement)) {
+            nouvelleCommande.put("type", "Commande avec crédit");
+            nouvelleCommande.put("tauxInteret", "3.5%");
+        } else {
+            nouvelleCommande.put("type", "Commande au comptant");
+            nouvelleCommande.put("remise", "2%");
+        }
+        
+        // Template Method
+        String pays = (String) commandeData.getOrDefault("pays", "FR");
+        double montant = ((Number) commandeData.getOrDefault("montant", 0)).doubleValue();
+        
+        CalculCommandeTemplate calculateur = getCalculateurTaxes(pays);
+        double montantFinal = calculateur.calculerMontantFinal(montant, pays);
+        
+        nouvelleCommande.put("montantBase", montant);
+        nouvelleCommande.put("montantTotal", montantFinal);
+        nouvelleCommande.put("pays", pays);
+        nouvelleCommande.put("calculateur", calculateur.getClass().getSimpleName());
+        
+        commandes.add(nouvelleCommande);
+        
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Commande créée avec succès");
+        response.put("commande", nouvelleCommande);
+        response.put("patterns", Arrays.asList("Factory Method", "Template Method"));
+        
+        return response;
+    }
+    
+    @PutMapping("/{id}/valider")
+    public Map<String, Object> validerCommande(@PathVariable int id) {
+        for (Map<String, Object> cmd : commandes) {
+            if (((Number) cmd.get("id")).intValue() == id) {
+                cmd.put("status", "VALIDEE");
+                cmd.put("dateValidation", LocalDateTime.now().toString());
+                
+                Map<String, Object> response = new HashMap<>();
+                response.put("message", "Commande validée avec succès");
+                response.put("commande", cmd);
+                return response;
+            }
+        }
+        
+        Map<String, Object> error = new HashMap<>();
+        error.put("error", "Commande non trouvée");
+        error.put("id", id);
+        return error;
+    }
+    
+    @PutMapping("/{id}/livrer")
+    public Map<String, Object> livrerCommande(@PathVariable int id) {
+        for (Map<String, Object> cmd : commandes) {
+            if (((Number) cmd.get("id")).intValue() == id) {
+                cmd.put("status", "LIVREE");
+                cmd.put("dateLivraison", LocalDateTime.now().toString());
+                
+                Map<String, Object> response = new HashMap<>();
+                response.put("message", "Commande livrée avec succès");
+                response.put("commande", cmd);
+                return response;
+            }
+        }
+        
+        Map<String, Object> error = new HashMap<>();
+        error.put("error", "Commande non trouvée");
+        error.put("id", id);
+        return error;
+    }
+    
+    @GetMapping("/template/{pays}")
+    public Map<String, Object> testTemplateMethod(@PathVariable String pays, 
+                                                 @RequestParam(defaultValue = "10000") double montant) {
+        CalculCommandeTemplate calculateur = getCalculateurTaxes(pays);
+        double montantFinal = calculateur.calculerMontantFinal(montant, pays);
+        
+        Map<String, Object> response = new HashMap<>();
+        response.put("pattern", "Template Method");
+        response.put("pays", pays);
+        response.put("montantBase", montant);
+        response.put("montantFinal", montantFinal);
+        response.put("difference", montantFinal - montant);
+        response.put("classe", calculateur.getClass().getSimpleName());
+        response.put("message", "Calcul avec Template Method Pattern");
+        return response;
+    }
+    
+    private CalculCommandeTemplate getCalculateurTaxes(String pays) {
+        switch (pays.toUpperCase()) {
+            case "FR": return new CalculCommandeFrance();
+            case "DE": return new CalculCommandeAllemagne();
+            case "BE": return new CalculCommandeBelgique();
+            case "ES": return new CalculCommandeEurope(); // Europe pour l'Espagne
+            default: return new CalculCommandeEurope();
+        }
+    }
+}
